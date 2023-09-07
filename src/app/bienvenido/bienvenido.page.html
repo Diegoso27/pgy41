@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Bienvenido</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-item class="itemBox">
+  <ion-avatar slot="start">
+    <img [routerLink]="['/perfil']" alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+  </ion-avatar>
+  <ion-label> Claudio Cornejo </ion-label>
+</ion-item>
+
+<ion-content>
+  <ion-button  [routerLink]="['/scan-qr']" class="button1">
+    <ion-icon slot="start" name="qr-code-outline"></ion-icon>
+    Escanear   QR.
+  </ion-button>
+  <ion-button [routerLink]="['/asist-register']" class="button2">
+    <ion-icon slot="start" name="calendar-outline"></ion-icon>
+    Ver Asistencia 
+  </ion-button>
+  <ion-button [routerLink]="['/login']" class="button3">
+    <ion-icon slot="start" name="log-out-outline"></ion-icon>
+    Cerrar sesión 
+  </ion-button>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar color = "primary">
+    <ion-button slot="end">
+        <ion-label>DuocUC</ion-label>
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>
+

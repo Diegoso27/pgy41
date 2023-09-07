@@ -1,0 +1,55 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Asistencia</ion-title>
+  </ion-toolbar>
+</ion-header>
+<!-- content -->
+<ion-content>
+  <ion-list [inset]="true">
+    <ion-item>
+      <ion-label>
+        <ion-icon name="logo-ionic"></ion-icon>
+        Programacion De Aplicaciones Moviles
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        <ion-icon name="book-outline"></ion-icon>
+        Ingles Intermedio
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        <ion-icon name="leaf-outline"></ion-icon>
+        Etica Para El Trabajo
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        <ion-icon name="stats-chart-outline"></ion-icon>
+        Estadistica Descriptiva
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        <ion-icon name="battery-charging-outline"></ion-icon>
+        Calidad De Software
+      </ion-label>
+    </ion-item>
+  </ion-list>
+<!-- btn volver -->
+  <ion-button [routerLink]="['/login']" class="btn1" shape="round">Regresar</ion-button>
+</ion-content>
+
+
+<!-- content -->
+<ion-footer>
+  <ion-toolbar color = "primary">
+    <ion-button slot="end">
+      <ion-button [routerLink]="['/login']">Volver al inicio</ion-button>
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>
