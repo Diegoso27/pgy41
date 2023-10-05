@@ -16,24 +16,31 @@ import { AlertController } from '@ionic/angular';
 
 export class RegistroPage implements OnInit {
   
-  formularioRegistro: FormGroup;
-
-  constructor(public fb: FormBuilder,
+  constructor(
+    public formBuilder: FormBuilder,
     public alertController: AlertController,
-    private router:Router) { 
+    private router:Router
+    ) { }
 
-    this.formularioRegistro = this.fb.group({
-      'nombre': new FormControl("", Validators.required),
-      'password': new FormControl("", Validators.required),
-      'confirmacionPassword': new FormControl("", Validators.required)
-    });
-  }
+  form = this.formBuilder.group({
+    email: ['',[Validators.email, Validators.required]],
+    password: ['', [Validators.required]],
+    confirmPassword: ['',[Validators.required]]    
+  })  
 
 
   ngOnInit() {
   }
 
-  async guardar(){
+  async register() {
+    if(this.form.valid) {
+      const { email, password } = this.form.getRawValue();
+      await this.router.navigate(['/login']);
+      console.log(email, password);
+    }
+  }
+
+ /* async guardar(){
     var f = this.formularioRegistro.value;
 
     if(this.formularioRegistro.invalid){
@@ -52,5 +59,6 @@ export class RegistroPage implements OnInit {
     localStorage.setItem('usuario',JSON.stringify(usuario));
 
     this.router.navigateByUrl("login");
-  }
+  */
+
 }
