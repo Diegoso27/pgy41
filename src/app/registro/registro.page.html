@@ -1,6 +1,6 @@
 <ion-header [translucent]="true">
-  <ion-toolbar color="primary">
-    <ion-title>Registro</ion-title>
+  <ion-toolbar color="dark">
+    <ion-title class="ion-text-center">Registrar</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -19,10 +19,11 @@
   </form>
   <ion-row>
     <ion-col>
-      <ion-button routerLink="/registro" expand="block">Iniciar Sesión</ion-button>
+      <ion-button shape="round" type="submit" color="success" (click)="register()" expand="block">Registrarse </ion-button>
     </ion-col>
     <ion-col>
-      <ion-button type="submit" (click)="register()" expand="block">Registrarse </ion-button>
+      <ion-button shape="round" routerLink="/login" expand="block">Iniciar Sesión</ion-button>
     </ion-col>
+
   </ion-row>
 </ion-content>

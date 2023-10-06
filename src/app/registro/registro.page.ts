@@ -41,7 +41,7 @@ export class RegistroPage implements OnInit {
       console.log("aaa")
       this.auth.register(email, password)
       .then(() => {
-        this.router.navigate(['/home']);  
+        this.router.navigate(['/login']);  
       })
       .catch(error => {
         console.log(error);
