@@ -5,9 +5,12 @@ import {
   Validators,
   FormBuilder
 } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { HelperService } from 'src/app/services/helper.service';
+import { signInWithEmailAndPassword } from '@angular/fire/auth';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -19,7 +22,9 @@ export class LoginPage implements OnInit {
   constructor(
     public formBuilder: FormBuilder,
     public alertController: AlertController,
-    private router:Router,private helperService:HelperService
+    private router:Router,
+    private helperService:HelperService,
+    private auth: AuthService
     ) {}
 
   form = this.formBuilder.group({
@@ -37,14 +42,20 @@ export class LoginPage implements OnInit {
     this.router.navigate(['/registro'])
   }
   
-  login(){
+  login() {
+    console.log("hola");
     if(this.form.valid) {
+      console.log("hola 2");
       const { email, password } = this.form.getRawValue();
-      
-
-
-    }
-
-    
+      this.auth.login(email, password)
+      .then(() => {
+        this.router.navigate(['/bienvenido']);
+      })
+      .catch(error => {
+      console.log(error)
+      });     
+    } else {
+      this.form.markAllAsTouched();
+    }    
   }
 } 

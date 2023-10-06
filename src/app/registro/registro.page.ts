@@ -7,6 +7,7 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-registro',
@@ -19,13 +20,13 @@ export class RegistroPage implements OnInit {
   constructor(
     public formBuilder: FormBuilder,
     public alertController: AlertController,
-    private router:Router
-    ) { }
+    private router:Router,
+    private auth: AuthService
+    ) { } 
 
   form = this.formBuilder.group({
     email: ['',[Validators.email, Validators.required]],
-    password: ['', [Validators.required]],
-    confirmPassword: ['',[Validators.required]]    
+    password: ['', [Validators.required]]  
   })  
 
 
@@ -33,32 +34,23 @@ export class RegistroPage implements OnInit {
   }
 
   async register() {
+
+    console.log('aaaa');
     if(this.form.valid) {
       const { email, password } = this.form.getRawValue();
-      await this.router.navigate(['/login']);
-      console.log(email, password);
+      console.log("aaa")
+      this.auth.register(email, password)
+      .then(() => {
+        this.router.navigate(['/login']);  
+      })
+      .catch(error => {
+        console.log(error);
+      });  
+    } else {
+      this.form.markAllAsTouched();
+      console.log("BBB")
+
     }
   }
-
- /* async guardar(){
-    var f = this.formularioRegistro.value;
-
-    if(this.formularioRegistro.invalid){
-      const alert = await this.alertController.create({
-        header: 'Campos vacios',
-        message: 'Porfavor ingresar correctamente los datos',
-        buttons: ['Aceptar']
-      });
-      await alert.present();
-      return;
-    }
-    var usuario = {
-      nombre: f.nombre,
-      password: f.password
-    }
-    localStorage.setItem('usuario',JSON.stringify(usuario));
-
-    this.router.navigateByUrl("login");
-  */
 
 }
