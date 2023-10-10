@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 import { HelperService } from 'src/app/services/helper.service';
 import { signInWithEmailAndPassword } from '@angular/fire/auth';
 import { AuthService } from '../services/auth.service';
+import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -18,6 +19,10 @@ import { AuthService } from '../services/auth.service';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
+
+  user$ = this.auth.authState$.pipe(
+    filter(state => state ? true : false)
+  );
 
   constructor(
     public formBuilder: FormBuilder,
@@ -30,12 +35,13 @@ export class LoginPage implements OnInit {
   form = this.formBuilder.group({
     email: ['',[Validators.email, Validators.required]],
     password: ['',[Validators.required]]
-  })
+  });
 
 
 
 
   ngOnInit() {
+    console.log(this.user$);
   }
 
   navegarRegistro() {

@@ -23,7 +23,7 @@ export class RecupContraPage implements OnInit {
     private router: Router
   ) { }
 
-  userEmail = new FormControl('');
+  email: string = '';
 
 
   ngOnInit() {
@@ -31,9 +31,8 @@ export class RecupContraPage implements OnInit {
 
   async resetPassword() {
       try {
-        const email = this.userEmail.value;
-        console.log(email);
-        await this.auth.resetPassword(email);
+        console.log(this.email);
+        await this.auth.resetPassword(this.email);
         this.router.navigate(['/login']);
       } catch (error) {
         console.log(error);
