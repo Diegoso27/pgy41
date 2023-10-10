@@ -11,7 +11,7 @@ export class MenuComponent  implements OnInit {
 
   user$ = this.auth.authState$.pipe(
     filter(state => state ? true : false)
-  )
+  );
 
   constructor(
     private auth: AuthService
