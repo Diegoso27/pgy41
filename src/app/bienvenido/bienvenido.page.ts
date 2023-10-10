@@ -26,10 +26,8 @@ export class BienvenidoPage implements OnInit {
 
   async logout() {
     await this.auth.logout();
-    await this.router.navigate(['/login']);
-
-
-  }
+    this.router.navigate(['/login']);
+  } 
 
 
 }

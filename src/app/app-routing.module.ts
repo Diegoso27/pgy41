@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import { AngularFireAuthGuard, redirectUnauthorizedTo } from '@angular/fire/compat/auth-guard'
+import {AuthGuard, redirectUnauthorizedTo } from '@angular/fire/auth-guard'
 
 
-const redirectToLogin = () => redirectUnauthorizedTo(['/login']);
+const redirectToLogin = () => redirectUnauthorizedTo(['login']);
 
 const routes: Routes = [
   
@@ -21,9 +21,9 @@ const routes: Routes = [
     loadChildren: () => import('./registro/registro.module').then( m => m.RegistroPageModule)
   },
   {
-    //canActivate:[AngularFireAuthGuard],
-    //data:{ authGuardPipe : redirectToLogin },
     path: 'bienvenido',
+    canActivate:[AuthGuard],
+    data:{ authGuardPipe : redirectToLogin },
     loadChildren: () => import('./bienvenido/bienvenido.module').then( m => m.BienvenidoPageModule)
   },
   {

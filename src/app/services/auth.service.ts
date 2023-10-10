@@ -33,13 +33,12 @@ export class AuthService {
     return await signInWithEmailAndPassword(this.auth, email, password); 
   }
 
-  async login(email: any, password: any) {
+  login(email: any, password: any) {
     return signInWithEmailAndPassword(this.auth, email, password);
   }
 
   logout() {
     return signOut(this.auth);
   }
-
 
 }
