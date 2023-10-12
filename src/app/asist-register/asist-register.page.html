@@ -1,4 +1,38 @@
 <ion-header>
+  <ion-toolbar color="dark">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title class="ion-text-center">Asistencias</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding" *ngFor="let item of asignaturaArray; let indice = index">
+  <ion-list>
+    <ion-item>
+      <ion-label>
+        <a [routerLink]="['/ver-asist', asignaturaArray[indice].codigo]">
+          {{indice}}.-  {{item.nombre}}
+        </a>
+        <ion-icon slot="end" name="leaf-outline"></ion-icon>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+  &nbsp; 
+
+
+
+</ion-content>
+
+
+
+
+
+
+
+
+
+
+<!--<ion-header>
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
@@ -6,7 +40,7 @@
     <ion-title>Asistencia</ion-title>
   </ion-toolbar>
 </ion-header>
-<!-- content -->
+content 
 <ion-content>
   <ion-list [inset]="true">
     <ion-item>
@@ -40,16 +74,16 @@
       </ion-label>
     </ion-item>
   </ion-list>
-<!-- btn volver -->
+<!-- btn volver
   <ion-button [routerLink]="['/login']" class="btn1" shape="round">Regresar</ion-button>
 </ion-content>
 
 
-<!-- content -->
+<!-- content 
 <ion-footer>
   <ion-toolbar color = "primary">
     <ion-button slot="end">
       <ion-button [routerLink]="['/login']">Volver al inicio</ion-button>
     </ion-button>
   </ion-toolbar>
-</ion-footer>
+</ion-footer> -->

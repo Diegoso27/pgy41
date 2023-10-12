@@ -9,6 +9,9 @@ export class RegisterAssitPage implements OnInit {
 
   constructor() { }
 
+
+
+
   ngOnInit() {
   }
 
