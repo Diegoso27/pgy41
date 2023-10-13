@@ -23,11 +23,12 @@ export class BienvenidoPage implements OnInit {
     console.log(this.user$);
   }
 
-
   async logout() {
     await this.auth.logout();
     this.router.navigate(['/login']);
   } 
+
+
 
 
 }
