@@ -8,17 +8,19 @@
 </ion-header>
 
 
-<ion-item class="itemBox">
-  <ion-avatar slot="start">
-    <img [routerLink]="['/perfil']" alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
-  </ion-avatar>
-  <ng-container *ngIf="user$ | async as user">
-    <ion-list-header>Bienvenido! {{user.email}}</ion-list-header>  
+<ion-item class="itemBox" *ngFor="let i of usuario" >
+  <h1>  Bienvenido {{i.name}}</h1>
+<ion-avatar slot="start">
+  <img [routerLink]="['/perfil']" alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+</ion-avatar>
 
-  </ng-container>
 </ion-item>
 
 <ion-content class="ion-padding">
+  <ion-card-header *ngFor="let keyValuePair of usuario | keyvalue">
+    <ion-card-title>{{ keyValuePair.key }}</ion-card-title>
+    <ion-card-subtitle>{{ keyValuePair.value }}</ion-card-subtitle>
+  </ion-card-header>
   <ion-row>
     <ion-col>
       <ion-button  [routerLink]="['/scan-qr']" expand="block" shape="round">
@@ -33,7 +35,7 @@
       </ion-button>
     </ion-col>
     <ion-col>
-      <ion-button color="danger" (click)="logout()" expand="block" shape="round">
+      <ion-button (click)="logout()" color="danger" expand="block" shape="round">
         <ion-icon slot="start" name="log-out-outline"></ion-icon>
         Cerrar sesión 
       </ion-button>

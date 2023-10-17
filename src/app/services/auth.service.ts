@@ -11,12 +11,17 @@ export class AuthService {
 
   authState$ = authState(this.auth);
   
+  
 
   
   constructor(
     private auth: Auth
   ) { }
 
+    
+  currentUser() {
+    return this.auth.currentUser;
+  }
 
   async resetPassword(email: any): Promise<void> {
     try {
