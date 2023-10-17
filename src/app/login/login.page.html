@@ -4,11 +4,11 @@
   </ion-toolbar>
 </ion-header>
 
-<ng-container *ngIf="user$ | async as user">
-  <ion-list-header>Hola</ion-list-header>  
-  <ion-note>{{user.email}}</ion-note>
+<ion-card #card style="width: 80px; --width: 160px;" ng-init="play()">
+  <ion-label>Bienvenido</ion-label>
+</ion-card>
+<!-- <ion-button (click)="play()">Play</ion-button> -->
 
-</ng-container>
 
 <ion-content class="ion-padding">
   <form [formGroup]="form" novalidate>

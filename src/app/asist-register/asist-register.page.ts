@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Asignatura } from '../models/asignatura.model';
+import { Router } from '@angular/router';
+import { AsignaturasService } from '../services/asignaturas.service';
 
 @Component({
   selector: 'app-asist-register',
@@ -8,19 +10,23 @@ import { Asignatura } from '../models/asignatura.model';
 })
 export class AsistRegisterPage implements OnInit {
 
-  asignaturaArray: Asignatura[]= [
-    {nombre: 'Programación de Aplicaciones moviles', codigo: 'PGY', asistencia: 0},
-    {nombre: 'Ingles Intermedio', codigo: 'ING', asistencia: 0},
-    {nombre: 'Calidad de Software', codigo: 'CDS', asistencia: 0},
-    {nombre: 'Programación de Aplicaciones moviles', codigo: 'PGY', asistencia: 0},
-    {nombre: 'Ingles Intermedio', codigo: 'ING', asistencia: 0},
-    {nombre: 'Calidad de Software', codigo: 'CDS', asistencia: 0}  
-  ];
 
 
-  constructor() { }
+  asignaturaArray: Asignatura[] = this.asignaturas.asignaturaArray;
+
+
+  constructor(
+    private router: Router,
+    private asignaturas: AsignaturasService
+  ) { }
 
   ngOnInit() {
+  }
+
+  onClick(item: any, index: number) {
+    console.log(item);
+    this.router.navigate(['/ver-asist',index,item.codigo]);
+    
   }
 
 }

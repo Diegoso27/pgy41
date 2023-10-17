@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import {
   FormGroup,
   FormControl,
@@ -6,12 +6,13 @@ import {
   FormBuilder
 } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
-import { AlertController } from '@ionic/angular';
+import { AlertController, AnimationController, IonCard } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { HelperService } from 'src/app/services/helper.service';
 import { signInWithEmailAndPassword } from '@angular/fire/auth';
 import { AuthService } from '../services/auth.service';
 import { filter } from 'rxjs';
+import type { Animation } from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
@@ -19,18 +20,39 @@ import { filter } from 'rxjs';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
+  @ViewChild(IonCard, { read: ElementRef })
+  card!: ElementRef<HTMLIonCardElement>;
 
   user$ = this.auth.authState$.pipe(
     filter(state => state ? true : false)
   );
+
+
+  private animation!: Animation;
+
 
   constructor(
     public formBuilder: FormBuilder,
     public alertController: AlertController,
     private router:Router,
     private helperService:HelperService,
-    private auth: AuthService
+    private auth: AuthService,
+    private animationCtrl: AnimationController
     ) {}
+
+    ngAfterViewInit() {
+      this.animation = this.animationCtrl
+        .create()
+        .addElement(this.card.nativeElement)
+        .duration(1500)
+        .iterations(Infinity)
+        .direction('alternate')
+        .fromTo('background', 'blue', 'var(--background)');
+        this.animation.play();
+    }
+
+  
+    
 
   form = this.formBuilder.group({
     email: ['',[Validators.email, Validators.required]],
@@ -45,7 +67,7 @@ export class LoginPage implements OnInit {
   }
 
   navegarRegistro() {
-    this.router.navigate(['/registro'])
+    this.router.navigate(['/registro']);
   }
   
   login() {
