@@ -35,7 +35,7 @@ export class LoginPage implements OnInit {
     public formBuilder: FormBuilder,
     public alertController: AlertController,
     private router:Router,
-    private helperService:HelperService,
+    private helper:HelperService,
     private auth: AuthService,
     private animationCtrl: AnimationController
     ) {}
@@ -78,9 +78,12 @@ export class LoginPage implements OnInit {
       this.auth.login(email, password)
       .then(() => {
         this.router.navigate(['/bienvenido']);
+      const asd = this.helper.showToast("hola");
       })
       .catch(error => {
-      console.log(error)
+        if(error.code == 'auth/invalid-login-credentials') {
+          const msj = this.helper.showAlert('Correo y/o contraseña no validas','Credenciales no validas');
+        }
       });     
     } else {
       this.form.markAllAsTouched();

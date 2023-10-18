@@ -10,6 +10,7 @@ import { AlertController } from '@ionic/angular';
 import { AuthService } from '../services/auth.service';
 import { StorageService } from '../services/storage.service';
 import { Usuario } from '../models/usuario';
+import { HelperService } from '../services/helper.service';
 
 @Component({
   selector: 'app-registro',
@@ -27,7 +28,8 @@ export class RegistroPage implements OnInit {
     public alertController: AlertController,
     private router:Router,
     private auth: AuthService,
-    private storage: StorageService
+    private storage: StorageService,
+    private helper: HelperService
     ) { } 
 
     userName: string = '';
@@ -36,35 +38,48 @@ export class RegistroPage implements OnInit {
 
   form = this.formBuilder.group({
     email: ['',[Validators.email, Validators.required]],
-    password: ['', [Validators.required]],
+    password: ['', [Validators.required, Validators.minLength(6)]],
     userName: ['',[Validators.required]]  
   })  
 
   ngOnInit() {}
 
   async register() {
-
-    console.log('aaaa');
     if(this.form.valid) {
+      const loader = await this.helper.showLoader("Cargando");
       const { email, password } = this.form.getRawValue();
-      console.log("aaa");
       this.auth.register(email, password)
       .then(async () => {
       var usuario = [{           
         name: this.userName,
         email: this.email2           
       }]
-      this.storage.setUser(usuario);
-      console.log(usuario);     
+      this.storage.guardarUsuario(usuario);
+      console.log(usuario);
+
 
         this.router.navigate(['/login']);  
+        loader.dismiss();
       })
-      .catch(error => {
-        console.log(error);
+      .catch(e => {
+        if(e.code == 'auth/email-already-in-use') {
+          const msj = this.helper.showAlert('El correo ingresado ya está registrado','Correo ya registrado');
+
+        }
       });  
-    } else {
-      this.form.markAllAsTouched();
-      console.log("BBB")
+    } if (this.form.get('email')?.errors?.['required']) {
+      const msj = this.helper.showAlert('Debes ingresar un correo','Campo Vacio');
+    } if (this.form.get('userName')?.errors?.['required']){
+      const msj = this.helper.showAlert('Debes ingresar un nombre','Campo Vacio');
+    } if (this.form.get('password')?.errors?.['required']) {
+      const msj = this.helper.showAlert('Debes ingresar una contraseña','Campo Vacio');
+    } if (this.form.get('email')?.errors?.['email']) {
+      const msj = this.helper.showAlert('El correo ingresado no es valido','Correo no valido');
+    } if (this.form.get('password')?.errors?.['minLength(6)']) {
+      const msj = this.helper.showAlert('Debes ingresar una contraseña de al menos 6 caracteres','Contraseña no valida');
+         
+
+
 
     }
   }
