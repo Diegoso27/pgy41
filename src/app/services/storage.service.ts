@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Preferences } from '@capacitor/preferences';
 import { Usuario } from '../models/usuario';
 
-
 const storageUsuario = 'usuarioData';
 
 @Injectable({
@@ -10,21 +9,29 @@ const storageUsuario = 'usuarioData';
 })
 export class StorageService {
 
-
-
+  public usuarioCorreo:string = "";
+  
   constructor() { 
 
     
   }
   
+  async getItem(key:string):Promise<string | null>{
+    const obj = await Preferences.get({key:key});
+    return obj.value;
+  }
 
-  async getUser():Promise<Usuario[]> {
-    const usuarioData = await this.getItem(storageUsuario);
-    if (usuarioData == null) {
+  async setItem(llave:string,valor:string){
+    await Preferences.set({key:llave,value:valor});
+  }
+
+  async obtenerUsuario():Promise<Usuario[]>{
+    const storageData = await this.getItem(storageUsuario);
+    if (storageData == null) {
       return[];
     }
 
-    const data:any[] = JSON.parse(usuarioData);
+    const data:any[] = JSON.parse(storageData);
     if (data) {
       return data;
     }
@@ -33,24 +40,14 @@ export class StorageService {
     }
   }
 
-  async setItem(key: string, value: any) {
-    await Preferences.set({key:key, value:value});
-  }
 
-  async getItem(key: string):Promise<string | null> {
-    const objeto = await Preferences.get({key});
-    return objeto.value
-
-  }
-
-  async setUser(usuario: Usuario[]) {
-    var usuarios = await this.getUser();
+  async guardarUsuario(usuario:Usuario[]){
+    var usuarios = await this.obtenerUsuario();
     for (const i of usuarios) {
       if (i) {
         usuario.push(i);
       }
-      this.setItem(storageUsuario, JSON.stringify(usuario));
     }
-    
+    this.setItem(storageUsuario,JSON.stringify(usuario));
   }
 }

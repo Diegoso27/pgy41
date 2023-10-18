@@ -18,6 +18,7 @@ export class BienvenidoPage implements OnInit {
 
   usuario: any;
   nombreUser: string = '';
+  usuarioCorreo: string = '';
 
   constructor(
     //private auth: AngularFireAuth,
@@ -28,27 +29,43 @@ export class BienvenidoPage implements OnInit {
 
 
 
-  async obtenerUsuario() {
-    const currentUser = this.auth.currentUser();
 
-    if (currentUser) {
-      const user = (await this.storage.getUser()).find(e => e.email === currentUser.email);
-
-      if (user) {
-          this.usuario = user;
-          this.nombreUser = user.name;
-      } else {
-
-      }
-  } else {
-
+  
+  async correoUserFirebase(){
+    var user = await this.auth.currentUser();
+    console.log("CURRENT USER", user?.email);
+    console.log("CORREO USUARIO STORAGE",this.nombreUser);
+    
   }
 
-  } 
+
+
+  async cargarUsuario() {
+    console.log("USUARIO STORAGE", await this.storage.obtenerUsuario());
+    console.log("PROPIEDAD SERVICE STORAGE", this.storage.usuarioCorreo);
+
+    const currentUser = await this.auth.currentUser();
+
+    if (currentUser) {
+        const user = (await this.storage.obtenerUsuario()).find(e => e.email == currentUser.email);
+
+        if (user) {
+            this.usuario = user;
+            this.usuarioCorreo = user.email;
+            this.nombreUser = user.name;
+            console.log(this.usuario);
+        } else {
+
+        }
+    } else {
+
+    }
+  }
 
   ngOnInit() {
    // console.log(this.user$);
-   this.obtenerUsuario();
+   this.cargarUsuario();
+   this.correoUserFirebase();
   }
 
   async logout() {
