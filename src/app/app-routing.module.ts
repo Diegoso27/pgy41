@@ -26,10 +26,7 @@ const routes: Routes = [
     data:{ authGuardPipe : redirectToLogin },
     loadChildren: () => import('./bienvenido/bienvenido.module').then( m => m.BienvenidoPageModule)
   },
-  {
-    path: 'scan-qr',
-    loadChildren: () => import('./scan-qr/scan-qr.module').then( m => m.ScanQRPageModule)
-  },
+
   {
     path: 'asist-register',
     loadChildren: () => import('./asist-register/asist-register.module').then( m => m.AsistRegisterPageModule)
@@ -58,6 +55,11 @@ const routes: Routes = [
     path: 'splash',
     loadChildren: () => import('./splash/splash.module').then( m => m.SplashPageModule)
   },
+  {
+    path: 'qr-result',
+    loadChildren: () => import('./modals/qr-result/qr-result.module').then( m => m.QrResultPageModule)
+  },
+
 
 ];
 

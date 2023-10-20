@@ -30,6 +30,8 @@ export class LoginPage implements OnInit {
 
   private animation!: Animation;
 
+  
+
 
   constructor(
     public formBuilder: FormBuilder,
@@ -84,6 +86,7 @@ export class LoginPage implements OnInit {
         if(error.code == 'auth/invalid-login-credentials') {
           const msj = this.helper.showAlert('Correo y/o contraseña no validas','Credenciales no validas');
         }
+        
       });     
     } else {
       this.form.markAllAsTouched();
