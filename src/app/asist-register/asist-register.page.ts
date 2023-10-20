@@ -25,7 +25,7 @@ export class AsistRegisterPage implements OnInit {
 
   onClick(item: any, index: number) {
     console.log(item);
-    this.router.navigate(['/ver-asist',index,item.codigo]);
+    this.router.navigate(['/ver-asist',index,item.asignatura]);
     
   }
 

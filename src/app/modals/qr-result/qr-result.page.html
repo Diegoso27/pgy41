@@ -1,0 +1,22 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="dark">
+    <ion-title class="ion-text-center">Información Asistencia</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+
+  <ion-card class="ion-padding">
+
+    <img src="assets/img/ok.png">
+    <h5 class="ion-text-center"><strong> Asistencia registrada con éxito!</strong></h5>
+    <hr>
+    <h4><strong>Codigo asignatura:</strong> {{dataAsistencia.asignatura}}</h4>
+    <h4><strong>Docente:</strong> {{dataAsistencia.docente}}</h4>
+    <h4><strong>Fecha:</strong> {{dataAsistencia.fecha}} </h4>
+  </ion-card>
+  <ion-button shape="round" expand="block"  color="success" (click)="close()">Aceptar</ion-button>
+
+</ion-content>
+

@@ -1,17 +1,11 @@
 <ion-header>
   <ion-toolbar color="dark">
-    <ion-buttons slot="end">
-      <ion-menu-button></ion-menu-button>
-    </ion-buttons>
     <ion-title class="ion-text-center">Bienvenido</ion-title>
   </ion-toolbar>
 </ion-header>
 
 
 <ion-content class="ion-padding">
-  <ion-avatar slot="start">
-    <img [routerLink]="['/perfil']" alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
-  </ion-avatar>
   <ion-item class="itemBox" >
     <h1>  Bienvenido {{nombreUser}}</h1>
   </ion-item>
@@ -20,7 +14,7 @@
   </ion-item>
    <ion-row>
     <ion-col>
-      <ion-button  [routerLink]="['/scan-qr']" expand="block" shape="round">
+      <ion-button (click)="scan()" expand="block" shape="round">
         <ion-icon slot="start" name="qr-code-outline"></ion-icon>
         Escanear   QR.
       </ion-button>
@@ -38,4 +32,15 @@
       </ion-button>
     </ion-col>
   </ion-row>
+  
+  <ion-card color="warning" class="ion-text-center ion-padding" *ngIf="jokeSingle">
+    <h3>JOKE Api</h3>
+    <h4> {{jokeSingle}}  </h4>
+  </ion-card>
+  <ion-card color="warning" class="ion-text-center" *ngIf="jokeDelivery">
+    <h3>JOKE Api</h3>
+    <h4> {{jokeSetup}}  </h4>
+    <h4> {{jokeDelivery}} </h4>
+  </ion-card>
+
 </ion-content>

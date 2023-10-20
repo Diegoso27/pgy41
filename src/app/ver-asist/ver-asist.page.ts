@@ -21,17 +21,26 @@ export class VerAsistPage implements OnInit {
     private asignaturas: AsignaturasService
   ) { }
 
-  nombre: string = "";
-  codigo: string = "";
+  asignatura: string ="";
+  seccion: string ="";
+  docente: string ="";
+  sala: string ="";
+  fecha: string ="";
+  hora: string ="";
+  leccion: string ="";
   index: number = 0;
-  asistencia: number = 0;
 
 
   ngOnInit() {
     this.index = this.activatedRoute.snapshot.params['index'];
-    this.nombre = this.asignaturaArray[this.index].nombre;
-    this.codigo = this.asignaturaArray[this.index].codigo;
-    this.asistencia = this.asignaturaArray[this.index].asistencia;
+    this.seccion = this.asignaturaArray[this.index].seccion;
+    this.docente = this.asignaturaArray[this.index].docente;
+    this.asignatura = this.asignaturaArray[this.index].asignatura;
+    this.sala = this.asignaturaArray[this.index].sala;
+    this.fecha = this.asignaturaArray[this.index].fecha;
+    this.hora = this.asignaturaArray[this.index].hora;
+    this.leccion = this.asignaturaArray[this.index].leccion;
+
     
     console.log("item", this.index);
    }

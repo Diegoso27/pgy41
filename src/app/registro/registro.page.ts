@@ -64,6 +64,7 @@ export class RegistroPage implements OnInit {
       .catch(e => {
         if(e.code == 'auth/email-already-in-use') {
           const msj = this.helper.showAlert('El correo ingresado ya está registrado','Correo ya registrado');
+          loader.dismiss();
 
         }
       });  
