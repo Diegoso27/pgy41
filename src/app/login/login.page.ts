@@ -13,6 +13,7 @@ import { signInWithEmailAndPassword } from '@angular/fire/auth';
 import { AuthService } from '../services/auth.service';
 import { filter } from 'rxjs';
 import type { Animation } from '@ionic/angular';
+import { Network, ConnectionStatus } from '@capacitor/network';
 
 @Component({
   selector: 'app-login',
@@ -27,8 +28,16 @@ export class LoginPage implements OnInit {
     filter(state => state ? true : false)
   );
 
+  networkListener:any='';
+  
 
+ 
+    
   private animation!: Animation;
+
+  ngOnInit() {
+
+  }
 
   
 
@@ -39,7 +48,8 @@ export class LoginPage implements OnInit {
     private router:Router,
     private helper:HelperService,
     private auth: AuthService,
-    private animationCtrl: AnimationController
+    private animationCtrl: AnimationController,
+  
     ) {}
 
     ngAfterViewInit() {
@@ -64,9 +74,6 @@ export class LoginPage implements OnInit {
 
 
 
-  ngOnInit() {
-    console.log(this.user$);
-  }
 
   navegarRegistro() {
     this.router.navigate(['/registro']);

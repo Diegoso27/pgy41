@@ -74,8 +74,22 @@ export class BienvenidoPage implements OnInit {
   }
 
   async modalResultQr(){
-    var qr = [];
-    qr.push(this.resultQr);
+    
+/*     var asistencia = 
+    [ {
+      asignatura: this.resultQr.asignatura,
+      seccion: this.resultQr.seccion,
+      docente: this.resultQr.docente,
+      sala: this.resultQr.sala,
+      fecha: this.resultQr.resut,
+      hora: this.resultQr.hora,
+      leccion: this.resultQr.leccion
+    }
+    ];
+    qr.push(this.resultQr); */
+  
+
+
     const parametros={dataQr: this.resultQr}
     await this.helper.showModal(QrResultPage,parametros,false);
   }
