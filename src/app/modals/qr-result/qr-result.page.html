@@ -5,18 +5,40 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-
-
-  <ion-card class="ion-padding">
-
-    <img src="assets/img/ok.png">
-    <h5 class="ion-text-center"><strong> Asistencia registrada con éxito!</strong></h5>
-    <hr>
-    <h4><strong>Codigo asignatura:</strong> {{dataAsistencia.asignatura}}</h4>
-    <h4><strong>Docente:</strong> {{dataAsistencia.docente}}</h4>
-    <h4><strong>Fecha:</strong> {{dataAsistencia.fecha}} </h4>
+  <ion-card>
+    <ion-card-header>
+      Información del código QR
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item>
+          Asignatura: {{ infoQr.asignatura }}
+        </ion-item>
+        <ion-item>
+          Docente: {{ infoQr.docente }}
+        </ion-item>
+        <ion-item>
+          Fecha: {{ infoQr.fecha }}
+        </ion-item>
+        <ion-item>
+          Hora: {{ infoQr.hora }}
+        </ion-item>
+        <ion-item>
+          Lección: {{ infoQr.leccion }}
+        </ion-item>
+        <ion-item>
+          Sala: {{ infoQr.sala }}
+        </ion-item>
+        <ion-item>
+          Sección: {{ infoQr.seccion }}
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
   </ion-card>
-  <ion-button shape="round" expand="block"  color="success" (click)="close()">Aceptar</ion-button>
+  
+  <ion-button shape="round" (click)="guardarAsignatura()">guardar</ion-button>
 
+
+  
 </ion-content>
 

@@ -13,4 +13,15 @@ describe('HelperService', () => {
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
+
+  it('Probando el metodo de suma del Helper', () => {
+    
+    const numUno = 75;
+    const numDos = 25;
+
+    const resultado = service.sumar(numUno,numDos);
+
+    expect(resultado).toBe(100);
+
+  });
 });

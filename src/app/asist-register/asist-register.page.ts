@@ -10,9 +10,18 @@ import { AsignaturasService } from '../services/asignaturas.service';
 })
 export class AsistRegisterPage implements OnInit {
 
+  asistencias: any;
+  xasignatura:string = "";
+   xdocente:string = "";
+   xfecha:string = "";
+   xhora:string = "";
+   xleccion:string = "";
+   xsala:string = "";
+   xseccion:string = "";
 
 
-  asignaturaArray: Asignatura[] = this.asignaturas.asignaturaArray;
+
+ 
 
 
   constructor(
@@ -21,11 +30,26 @@ export class AsistRegisterPage implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.cargarAsignatura();
   }
 
-  onClick(item: any, index: number) {
-    console.log(item);
-    this.router.navigate(['/ver-asist',index,item.asignatura]);
+  
+  volverM(){
+    this.router.navigateByUrl("bienvenido")
+   }
+  
+ 
+  
+  async cargarAsignatura(){
+    console.log("ASISTENCIA GUARDADA",await this.asignaturas.obtenerAsignatura());
+    this.asistencias = (await this.asignaturas.obtenerAsignatura());
+    this.xasignatura =  this.asistencias[0].asignatura;
+    this.xdocente =  this.asistencias[0].docente;
+    this.xfecha =  this.asistencias[0].fecha;
+    this.xhora =  this.asistencias[0].hora;
+    this.xleccion =  this.asistencias[0].leccion;
+    this.xsala =  this.asistencias[0].sala;
+    this.xseccion =  this.asistencias[0].seccion;
     
   }
 

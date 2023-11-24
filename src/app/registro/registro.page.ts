@@ -19,9 +19,9 @@ import { HelperService } from '../services/helper.service';
 })
 
 export class RegistroPage implements OnInit {
+
   
-  
-  
+    
 
   constructor(
     public formBuilder: FormBuilder,

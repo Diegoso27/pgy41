@@ -75,3 +75,4 @@ export class StorageService {
     this.setItem(storageUsuario,JSON.stringify(usuario));
   }
 }
+

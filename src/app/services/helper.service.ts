@@ -14,6 +14,11 @@ export class HelperService {
     private modalController: ModalController
     ) { }
 
+    sumar(n1:number, n2:number){
+      var result = n1 + n2;
+      return result;
+    }
+
 
   async showModal(component:any,props:any = {},hideable = false){
     var modal = await this.modalController.create

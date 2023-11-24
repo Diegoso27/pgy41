@@ -1,5 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { Router } from '@angular/router';
+import { ModalController, NavParams } from '@ionic/angular';
+import { AsignaturasService } from 'src/app/services/asignaturas.service';
+import { HelperService } from 'src/app/services/helper.service';
+import { StorageService } from 'src/app/services/storage.service';
 
 @Component({
   selector: 'app-qr-result',
@@ -7,21 +11,56 @@ import { ModalController } from '@ionic/angular';
   styleUrls: ['./qr-result.page.scss'],
 })
 export class QrResultPage implements OnInit {
+  @Input() asistencias:any;
   
-  @Input() dataQr:any;
+  infoQr: any;
+  
   dataAsistencia:any;
 
-  constructor(
-    private modalController: ModalController
-  ) { }
+  nombre:string = '';
+  asignatura:string = "";
+  docente:string = "";
+  fecha:string = "";
+  hora:string = "";
+  leccion:string = "";
+  sala:string = "";
+  seccion:string = "";
+
+
+  constructor(private modalController:ModalController,
+              private storageService:StorageService,
+              private asignaturaService: AsignaturasService,
+  
+              private helper:HelperService,
+              private router:Router,
+              private navParams: NavParams,
+    
+     ) { this.infoQr = this.navParams.get('dataQr');
+        console.log('Info QR:', this.infoQr)}
 
   ngOnInit() {
-    console.log("data-Modal",JSON.parse(this.dataQr));
-    this.dataAsistencia = JSON.parse(this.dataQr);
+    this.vistaAsignatura();
+ 
   }
   
   close(){
     this.modalController.dismiss();
+  }
+  async vistaAsignatura(){
+    console.log("ASIGNATURA STORAGE",await this.asignaturaService.obtenerAsignatura());
+  }
+
+
+  async guardarAsignatura(){
+
+    this.modalController.dismiss({
+      infoQr: this.infoQr
+    });
+
+    this.asignaturaService.guardarAsignatura(this.infoQr);
+    await this.helper.showAlert("Debe revisar su asistencia","Información");
+    
+
   }
 
 }

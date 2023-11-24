@@ -17,7 +17,15 @@ import {  GeolocationPlugin } from '@capacitor/geolocation';
 })
 export class BienvenidoPage implements OnInit {
 
-
+  infoQr:any[]=[];
+  nombre:string = '';
+  asignatura:string = "";
+  docente:string = "";
+  fecha:string = "";
+  hora:string = "";
+  leccion:string = "";
+  sala:string = "";
+  seccion:string = "";
   
   usuario: any;
   nombreUser: string = '';
@@ -67,31 +75,34 @@ export class BienvenidoPage implements OnInit {
 
   } */
 
-  async scan() {
-    this.resultQr = (await BarcodeScanner.scan()).code;
-    console.log(this.resultQr);
-    await this.modalResultQr();
-  }
+  async scan(){
+    var resultadoQr = (await BarcodeScanner.scan()).code;
+     
+    if (resultadoQr) {
+      const infoQr = JSON.parse(resultadoQr);
 
-  async modalResultQr(){
+      const parametros = {dataQr:infoQr};
     
-/*     var asistencia = 
-    [ {
-      asignatura: this.resultQr.asignatura,
-      seccion: this.resultQr.seccion,
-      docente: this.resultQr.docente,
-      sala: this.resultQr.sala,
-      fecha: this.resultQr.resut,
-      hora: this.resultQr.hora,
-      leccion: this.resultQr.leccion
+      this.helper.showModal(QrResultPage,parametros);
     }
-    ];
-    qr.push(this.resultQr); */
-  
+    var infoQr = 
+    [
+    
+      {
+        asignatura:this.asignatura,
+        docente:this.docente,
+        fecha:this.fecha,
+        hora:this.hora,
+        leccion:this.leccion,
+        sala:this.sala,
+        seccion:this.seccion
 
 
-    const parametros={dataQr: this.resultQr}
-    await this.helper.showModal(QrResultPage,parametros,false);
+      
+        }
+      ];
+
+
   }
 
 

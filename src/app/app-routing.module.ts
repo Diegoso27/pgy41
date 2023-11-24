@@ -47,10 +47,7 @@ const routes: Routes = [
     path: 'delete-account',
     loadChildren: () => import('./delete-account/delete-account.module').then( m => m.DeleteAccountPageModule)
   },
-  {
-    path: 'ver-asist/:index/:codigo',
-    loadChildren: () => import('./ver-asist/ver-asist.module').then( m => m.VerAsistPageModule)
-  },
+ 
   {
     path: 'splash',
     loadChildren: () => import('./splash/splash.module').then( m => m.SplashPageModule)

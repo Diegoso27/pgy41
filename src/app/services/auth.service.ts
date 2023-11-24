@@ -9,8 +9,10 @@ import { getAuth } from '@firebase/auth';
 
 export class AuthService {
 
+
+
   authState$ = authState(this.auth);
-  
+
   
 
   
@@ -22,6 +24,8 @@ export class AuthService {
   currentUser() {
     return this.auth.currentUser;
   }
+  
+ 
 
   async resetPassword(email: any): Promise<void> {
     try {

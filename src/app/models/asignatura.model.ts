@@ -1,9 +1,10 @@
 export interface Asignatura {
-    asignatura: string;
-    seccion: string;
-    docente: string;
-    sala: string;
+
+    asignatura:string;
+    docente:string;
     fecha: string;
     hora: string;
-    leccion: string;
+    leccion:string;
+    sala: string;
+    seccion: string;
 }
